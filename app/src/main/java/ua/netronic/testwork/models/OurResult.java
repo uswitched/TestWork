@@ -7,14 +7,16 @@ import io.reactivex.rxjava3.core.Observable;
 
 public class OurResult {
     private String name;
+    private String surname;
     private String email;
     private String phone;
     private String img;
     private String bigImg;
     private String gender;
 
-    public OurResult(String name, String email, String phone, String img, String bigImg, String gender) {
+    public OurResult(String name, String surname, String email, String phone, String img, String bigImg, String gender) {
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.img = img;
@@ -27,6 +29,7 @@ public class OurResult {
         for(Result result1 : response.getResults())
             list.add(new OurResult(
                     result1.getName().getFirst(),
+                    result1.getName().getLast(),
                     result1.getEmail(),
                     result1.getPhone(),
                     result1.getPicture().getMedium(),
@@ -39,6 +42,10 @@ public class OurResult {
 
     public String getName() {
         return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getEmail() {

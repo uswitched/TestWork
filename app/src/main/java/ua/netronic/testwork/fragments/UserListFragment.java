@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import ua.netronic.testwork.R;
 import ua.netronic.testwork.adapters.OurResultAdapter;
 import ua.netronic.testwork.customuibinding.CustomHandlerInterface;
 import ua.netronic.testwork.databinding.UsersFragmentBinding;
@@ -33,11 +34,10 @@ public class UserListFragment extends Fragment implements CustomHandlerInterface
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        UsersFragmentBinding binding = UsersFragmentBinding.inflate(inflater,container,false);
+        binding = UsersFragmentBinding.inflate(inflater,container,false);
 
         ourResultAdapter = new OurResultAdapter(this);
         binding.fragmentMainRecycler.setAdapter(ourResultAdapter);
-        Log.d("TAG","TAG");
         return binding.getRoot();
     }
 
@@ -57,6 +57,14 @@ public class UserListFragment extends Fragment implements CustomHandlerInterface
 
     @Override
     public void onClick(String email) {
-
+        UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("email", email);
+        userDetailsFragment.setArguments(bundle);
+        getParentFragmentManager()
+                .beginTransaction()
+                .addToBackStack("userDetails")
+                .replace(R.id.fragment_container_mainActivity,userDetailsFragment)
+                .commit();
     }
 }
