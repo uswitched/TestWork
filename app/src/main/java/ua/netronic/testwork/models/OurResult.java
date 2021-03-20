@@ -1,5 +1,10 @@
 package ua.netronic.testwork.models;
 
+import java.util.ArrayList;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+
 public class OurResult {
     private String name;
     private String email;
@@ -15,6 +20,21 @@ public class OurResult {
         this.img = img;
         this.bigImg = bigImg;
         this.gender = gender;
+    }
+
+    public static @NonNull Observable<ArrayList<OurResult>> convertToOurResult(Response response) {
+        ArrayList<OurResult> list = new ArrayList<>();
+        for(Result result1 : response.getResults())
+            list.add(new OurResult(
+                    result1.getName().getFirst(),
+                    result1.getEmail(),
+                    result1.getPhone(),
+                    result1.getPicture().getMedium(),
+                    result1.getPicture().getLarge(),
+                    result1.getGender()
+            ));
+
+        return io.reactivex.rxjava3.core.Observable.just(list);
     }
 
     public String getName() {
