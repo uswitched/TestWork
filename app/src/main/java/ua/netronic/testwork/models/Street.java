@@ -8,16 +8,16 @@ public class Street {
 
     @SerializedName("number")
     @Expose
-    private Integer number;
+    private String number;
     @SerializedName("name")
     @Expose
     private String name;
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
